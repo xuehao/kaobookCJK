@@ -1,0 +1,71 @@
+{
+  "latex-workshop.latex.tools": [
+    {
+      "name": "xelatex",
+      "command": "xelatex",
+      "args": ["--extra-mem-bot=10000000", "%DOCFILE%"]
+    },
+    {
+      "name": "pre-makeindex",
+      "command": "makeindex",
+      "args": ["%DOCFILE%.nlo", "-s", "nomencl.ist", "-o", "%DOCFILE%.nls"]
+    },
+    {
+      "name": "makeindex",
+      "command": "makeindex",
+      "args": ["%DOCFILE%"]
+    },
+    {
+      "name": "biber",
+      "command": "biber",
+      "args": ["%DOCFILE%"]
+    },
+    {
+      "name": "makeglossaries",
+      "command": "makeglossaries",
+      "args": ["%DOCFILE%"]
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "kaobookCJKsc",
+      "tools": [
+        "xelatex",
+        "pre-makeindex",
+        "makeindex",
+        "biber",
+        "makeglossaries",
+        "xelatex",
+        "xelatex",
+        "xelatex"
+      ]
+    }
+  ],
+  "latex-workshop.intellisense.package.enabled": true,
+  "latex-workshop.latexindent.path": "D:\\Software\\MiKTeX\\latexindent\\latexindent.exe",
+  "latex-workshop.latex.autoBuild.run": "never",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.latex.autoClean.run": "onFailed",
+  "latex-workshop.latex.clean.fileTypes": [
+    "*.aux",
+    "*.bbl",
+    "*.bcf",
+    "*.blg",
+    "*.glg",
+    "*.glo",
+    "*.gls",
+    "*.gz",
+    "*.idx",
+    "*.ilg",
+    "*.ind",
+    "*.lof",
+    "*.lol",
+    "*.lot",
+    "*.mw",
+    "*.nlo",
+    "*.nls",
+    "*.xml",
+    "*.toc",
+    "*.xdy"
+  ]
+}

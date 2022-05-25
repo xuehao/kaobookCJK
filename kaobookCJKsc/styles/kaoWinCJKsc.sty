@@ -1,0 +1,255 @@
+\ProvidesPackage{styles/kaoWinCJKsc}
+
+\RequirePackage{kvoptions} % Handle package options
+\SetupKeyvalOptions{
+	family = kaowincjksc,
+	prefix = kaowincjksc@
+}
+
+\DeclareBoolOption{testMathBox}% If true, put theorems into colorful boxes, otherwise write them like normal text
+
+\ProcessKeyvalOptions{kaowincjksc}
+
+%----------------------------------------------------------------------------------------
+% 加载包用于字体设置与选择
+\RequirePackage{xeCJK}
+
+% 检查可用中文字体名：fc-list -f "%{family}\n" :lang=zh > zh-font.txt
+\setCJKmainfont[BoldFont=Noto Serif CJK SC Bold,AutoFakeSlant]{Noto Serif CJK SC}
+\setCJKsansfont[BoldFont=Noto Sans CJK SC Bold,AutoFakeSlant]{Noto Sans CJK SC}
+\setCJKmonofont[BoldFont=Noto Sans Mono CJK SC Bold,AutoFakeSlant]{Noto Sans Mono CJK SC}
+
+%----------------------------------------------------------------------------------------
+% 加载包用于首行缩进
+\RequirePackage{indentfirst}
+\setlength{\parindent}{2em} % 首行缩进两个汉字或四个字母
+
+%----------------------------------------------------------------------------------------
+% 文本颜色
+\RequirePackage{xcolor}
+% 中文数字日期格式
+\RequirePackage{zhnumber}
+
+%----------------------------------------------------------------------------------------
+% Win10 平台中文字体集合
+\setCJKfamilyfont{nosat}{Noto Sans CJK SC Thin}
+\newcommand{\nosat}{\CJKfamily{nosat}}
+\setCJKfamilyfont{dx}{DengXian}                             %等线  dx
+\newcommand{\dx}{\CJKfamily{dx}}
+\setCJKfamilyfont{song}{SimSun}                             %宋体  song
+\newcommand{\song}{\CJKfamily{song}}
+\setCJKfamilyfont{xs}{NSimSun}                              %新宋体  xs
+\newcommand{\xs}{\CJKfamily{xs}}
+\setCJKfamilyfont{fs}{FangSong}                             %仿宋  fs
+\newcommand{\fs}{\CJKfamily{fs}}
+\setCJKfamilyfont{yh}{Microsoft YaHei}                      %微软雅黑  yh
+\newcommand{\yh}{\CJKfamily{yh}}
+\setCJKfamilyfont{hei}{SimHei}                              %黑体  hei
+\newcommand{\hei}{\CJKfamily{hei}}
+\setCJKfamilyfont{kai}{KaiTi}                               %楷体  kai
+\newcommand{\kai}{\CJKfamily{kai}}
+\setCJKfamilyfont{li}{LiSu}                                 %隶书  li
+\newcommand{\li}{\CJKfamily{li}}
+\setCJKfamilyfont{yy}{YouYuan}                              %幼圆  yy
+\newcommand{\yy}{\CJKfamily{yy}}
+\setCJKfamilyfont{hwsong}{STSong}                           %华文宋体  hwsong
+\newcommand{\hwsong}{\CJKfamily{hwsong}}
+\setCJKfamilyfont{hwzs}{STZhongsong}                        %华文中宋  hwzs
+\newcommand{\hwzs}{\CJKfamily{hwzs}}
+\setCJKfamilyfont{hwfs}{STFangsong}                         %华文仿宋  hwfs
+\newcommand{\hwfs}{\CJKfamily{hwfs}}
+\setCJKfamilyfont{hwxh}{STXihei}                            %华文细黑  hwxh
+\newcommand{\hwxh}{\CJKfamily{hwxh}}
+\setCJKfamilyfont{hwl}{STLiti}                              %华文隶书  hwl
+\newcommand{\hwl}{\CJKfamily{hwl}}
+\setCJKfamilyfont{hwxw}{STXinwei}                           %华文新魏  hwxw
+\newcommand{\hwxw}{\CJKfamily{hwxw}}
+\setCJKfamilyfont{hwk}{STKaiti}                             %华文楷体  hwk
+\newcommand{\hwk}{\CJKfamily{hwk}}
+\setCJKfamilyfont{hwxk}{STXingkai}                          %华文行楷  hwxk
+\newcommand{\hwxk}{\CJKfamily{hwxk}}
+\setCJKfamilyfont{hwcy}{STCaiyun}                           %华文彩云  hwcy
+\newcommand{\hwcy}{\CJKfamily{hwcy}}
+\setCJKfamilyfont{hwhp}{STHupo}                             %华文琥珀  hwhp
+\newcommand{\hwhp}{\CJKfamily{hwhp}}
+\setCJKfamilyfont{fzs}{FZShuTi}                             %方正舒体  fzs
+\newcommand{\fzs}{\CJKfamily{fzs}}
+\setCJKfamilyfont{fzy}{FZYaoTi}                             %方正姚体  fzy
+\newcommand{\fzy}{\CJKfamily{fzy}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 彩色盒子
+\ifkaowincjksc@testMathBox
+\RequirePackage{tikz} % Required by mdframed
+\RequirePackage[framemethod=TikZ]{mdframed} % Required for colorful boxes
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Theorem
+% define a counter for continuous numbering of the environment
+% by chapter or by section
+\newcounter{theo}[section] \setcounter{theo}{0}
+%\renewcommand{\thetheo}{\arabic{chapter}.\arabic{theo}} %显示章节名
+\renewcommand{\thetheo}{\arabic{theo}} %不显示章节名
+\newenvironment{theo}[2][]{%
+\refstepcounter{theo}%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=blue!20]
+{\strut Theorem~\thetheo};}}
+}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=blue!20]
+{\strut Theorem~\thetheo:~#1};}}%
+}%
+\mdfsetup{innertopmargin=10pt,linecolor=blue!20,%
+linewidth=2pt,topline=true,%
+frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+}
+\begin{mdframed}[]\relax%
+\label{#2}}{\end{mdframed}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Lemma
+\newcounter{lem}[section] \setcounter{lem}{0}
+\renewcommand{\thelem}{\arabic{lem}}
+\newenvironment{lem}[2][]{%
+\refstepcounter{lem}%
+\ifstrempty{#1}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=green!20]
+{\strut Lemma~\thelem};}}
+}%
+{\mdfsetup{%
+frametitle={%
+\tikz[baseline=(current bounding box.east),outer sep=0pt]
+\node[anchor=east,rectangle,fill=green!20]
+{\strut Lemma~\thelem:~#1};}}%
+}%
+\mdfsetup{innertopmargin=10pt,linecolor=green!20,%
+linewidth=2pt,topline=true,%
+frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+}
+\begin{mdframed}[]\relax%
+\label{#2}}
+{\end{mdframed}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Proof
+% [begin]define a new environment for proof
+\newenvironment{prf}[2][]{%
+    % box style
+    \ifstrempty{#1}
+    % if condition (without title)
+    {
+        \mdfsetup{%
+        frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=red!20]
+        {\strut Proof~};}}
+    }% else condition (with title)
+    {
+        \mdfsetup{%
+        frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=red!20]
+        {\strut Proof~:~#1};}}%
+    }%
+    % Both conditions
+    \mdfsetup{
+        innertopmargin=10pt,linecolor=red!20,%
+        linewidth=2pt,topline=true,%
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+    }
+
+    % [begin]define a new environment for proof
+    \begin{mdframed}[]\relax%
+    \label{#2}
+}
+{\qed\end{mdframed}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%soln
+% [begin]define a new environment for proof
+\newenvironment{soln}[2][]{%
+    % box style
+    \ifstrempty{#1}
+    % if condition (without title)
+    {
+        \mdfsetup{%
+        frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=red!20]
+        {\strut Solution~};}}
+    }% else condition (with title)
+    {
+        \mdfsetup{%
+        frametitle={%
+        \tikz[baseline=(current bounding box.east),outer sep=0pt]
+        \node[anchor=east,rectangle,fill=red!20]
+        {\strut Solution~:~#1};}}%
+    }%
+    % Both conditions
+    \mdfsetup{
+        innertopmargin=10pt,linecolor=red!20,%
+        linewidth=2pt,topline=true,%
+        frametitleaboveskip=\dimexpr-\ht\strutbox\relax
+    }
+
+    % [begin]define a new environment for proof
+    \begin{mdframed}[]\relax%
+    \label{#2}
+}
+{\qed\end{mdframed}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\fi
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 高等数学风格
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage[unq]{unique}
+
+\declaretheoremstyle[%
+    headindent=\parindent,
+    headfont=\normalfont\bfseries,%
+    notefont=\normalfont\bfseries, notebraces={(}{)},
+    bodyfont=\normalfont,
+    postheadspace=1em,%
+    %qed=\qedsymbol,%空心
+    qed=$\blacksquare$,%实心
+    headpunct={}
+]{mathstyle}
+
+\theoremstyle{mathstyle}
+% 使用 amsthm 定义
+\newtheorem*{Definition*}{定义}
+\newtheorem{Definition}{定义}[section]
+\renewcommand{\theDefinition}{\arabic{Definition}}
+
+\newtheorem*{Theorem*}{定理}
+\newtheorem{Theorem}{定理}[section]
+\renewcommand{\theTheorem}{\arabic{Theorem}}
+
+\newtheorem{Corollary}{推论}
+\renewcommand{\theCorollary}{\arabic{Corollary}}
+
+\newtheorem*{Lemma*}{引理}
+\newtheorem{Lemma}{引理}[section]
+\renewcommand{\theLemma}{\arabic{Lemma}}
+
+\newtheorem*{Proposition*}{命题}
+\newtheorem{Proposition}{命题}[section]
+\renewcommand{\theProposition}{\arabic{Proposition}}
+
+\newtheorem*{Proof*}{证}
+\newtheorem{Proof}{证}[section]
+\renewcommand{\theProof}{\arabic{Proof}}
+
+\newtheorem*{Example*}{例}
+\newtheorem{Example}{例}[section]
+\renewcommand{\theExample}{\arabic{Example}}
+
+\newtheorem*{Solution*}{解}
+\newtheorem{Solution}{解}[section]
+\renewcommand{\theSolution}{\arabic{Solution}}

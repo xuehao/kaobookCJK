@@ -1,0 +1,206 @@
+% Load the kaobook class
+\documentclass[
+	chinese,
+	fontsize=10pt, % Base font size
+	twoside=true, % Use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
+	open=any, % If twoside=true, uncomment this to force new chapters to start on any page, not only on right (odd) pages
+	secnumdepth=1, % How deep to number headings. Defaults to 1 (sections)
+]{styles/kaobookCJKsc}
+
+%----------------------------------------------------------------------------------------
+%	包以及文档配置，新项目可以直接复制粘贴
+%----------------------------------------------------------------------------------------
+
+% 加载排版包（不支持 chinese）
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\SetLanguageKeys{english}{indentfirst=true}
+% 加载引号风格包（不支持 chinese）
+\usepackage[style=english]{csquotes}
+% 加载参考文献相关设置
+\usepackage[style=gb7714-2015ms,backref=false]{styles/kaobiblioCJKsc} % 默认使用 GB 标准
+\addbibresource{main.bib} % 参考文献文本
+% 加载数学相关设置
+\usepackage[framed]{styles/kaotheoremsCJKsc}
+% 加载超链接相关设置
+\usepackage{styles/kaorefsCJKsc}
+% 加载平台中文字体及相关设置
+\usepackage[testMathBox]{styles/kaoWinCJKsc}
+% 加载测试包
+\usepackage{blindtext}
+
+% 图片路径
+\graphicspath{{examples/documentation/images/}{images/}}
+% 生成用于编译 索引 的文件
+\makeindex[columns=3, title=索引, intoc]
+% 生成用于编译 术语 的文件
+\makenomenclature
+% 每章开头重新给 边注 编号
+\counterwithin*{sidenote}{chapter}
+% 允许标题中出现 \\ 而不发出警告
+\pdfstringdefDisableCommands{\let\\\empty}
+
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	加载其他无法放在导言区的配置
+%----------------------------------------------------------------------------------------
+\input{styles/config.tex}
+
+
+%----------------------------------------------------------------------------------------
+%	BOOK INFORMATION
+%----------------------------------------------------------------------------------------
+
+\titlehead{一本小书}
+\title[用于制作书籍的 kaobookCJK 模板]{用于制作书籍的 kaobookCJK 模板}
+\author[MK]{薛浩}
+\date{\today}
+\publishers{绝绝子出版社}
+
+%----------------------------------------------------------------------------------------
+
+\frontmatter % Denotes the start of the pre-document content, uses roman numerals
+
+%----------------------------------------------------------------------------------------
+%	COPYRIGHT PAGE
+%----------------------------------------------------------------------------------------
+
+\makeatletter
+\uppertitleback{
+	\textbf{内容提要}
+	
+	\bigskip
+	
+	介绍一份可以制作精美图书的 \LaTeX 模板
+}
+
+\lowertitleback{
+	\textbf{声明} \\
+	You can edit this page to suit your needs. For instance, here we have a no copyright statement, a colophon and some other information. This page is based on the corresponding page of Ken Arroyo Ohori's thesis, with minimal changes.
+	
+	\medskip
+	
+	\textbf{版权没有，翻版不究} \\
+	\cczero\ This book is released into the public domain using the CC0 code. To the extent possible under law, I waive all copyright and related or neighbouring rights to this work.
+	
+	To view a copy of the CC0 code, visit: \\\url{http://creativecommons.org/publicdomain/zero/1.0/}
+	
+	\medskip
+	
+	\textbf{版本} \\
+	This document was typeset with the help of \href{https://sourceforge.net/projects/koma-script/}{\KOMAScript} and \href{https://www.latex-project.org/}{\LaTeX} using the \href{https://github.com/fmarotta/kaobook/}{kaobook} class.
+	
+	\medskip
+	
+	\textbf{出版} \\
+	First printed in \today by \@publishers
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	DEDICATION
+%----------------------------------------------------------------------------------------
+
+\dedication{
+	世界的和谐体现在形式和数量上，心灵和自然哲学的所有诗意都体现在数学美的概念中。\\
+	\flushright -- 达西·温特沃斯·汤普森 
+}
+
+%----------------------------------------------------------------------------------------
+%	OUTPUT TITLE PAGE AND PREVIOUS
+%----------------------------------------------------------------------------------------
+
+% Note that \maketitle outputs the pages before here
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	PREFACE
+%----------------------------------------------------------------------------------------
+
+\chapter*{前言}
+
+\blindtext
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS & LIST OF FIGURES/TABLES
+%----------------------------------------------------------------------------------------
+
+\begingroup % Local scope for the following commands
+
+% Define the style for the TOC, LOF, and LOT
+%\setstretch{1} % Uncomment to modify line spacing in the ToC
+%\hypersetup{linkcolor=blue} % Uncomment to set the colour of links in the ToC
+\setlength{\textheight}{230\vscale} % Manually adjust the height of the ToC pages
+
+% Turn on compatibility mode for the etoc package
+\etocstandarddisplaystyle % "toc display" as if etoc was not loaded
+\etocstandardlines % "toc lines as if etoc was not loaded
+
+\tableofcontents % Output the table of contents
+
+\listoffigures % Output the list of figures
+
+% Comment both of the following lines to have the LOF and the LOT on different pages
+\let\cleardoublepage\bigskip
+\let\clearpage\bigskip
+
+\listoftables % Output the list of tables
+
+\endgroup
+
+%----------------------------------------------------------------------------------------
+%	MAIN BODY
+%----------------------------------------------------------------------------------------
+
+\mainmatter % Denotes the start of the main document content, resets page numbering and uses arabic numbers
+\setchapterstyle{kaoCJK} % Choose the default chapter heading style
+
+\chapter{第一章}
+
+嗨 kaobookCJK 在此。\sidecite{James2013}
+
+\blindtext
+
+\pagelayout{wide} % No margins
+\addpart{基础篇}
+\pagelayout{margin} % Restore margins
+
+\chapter{第二章}
+
+\blindtext
+
+\appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
+
+\pagelayout{wide} % No margins
+\addpart{附录}
+\pagelayout{margin} % Restore margins
+
+\chapter{其他}
+
+\blindtext
+
+%----------------------------------------------------------------------------------------
+
+\backmatter % Denotes the end of the main document content
+\setchapterstyle{plain} % Output plain chapters from this point onwards
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+% The bibliography needs to be compiled with biber using your LaTeX editor, or on the command line with 'biber main' from the template directory
+
+\defbibnote{bibnote}{\noindent 以下依次列出所有参考文献.\par\bigskip} % Prepend this text to the bibliography
+\printbibliography[heading=bibintoc, title=参考文献, prenote=bibnote] % Add the bibliography heading to the ToC, set the title of the bibliography and output the bibliography note
+
+%----------------------------------------------------------------------------------------
+%	INDEX
+%----------------------------------------------------------------------------------------
+
+% The index needs to be compiled on the command line with 'makeindex main' from the template directory
+
+\printindex % Output the index
+
+\end{document}

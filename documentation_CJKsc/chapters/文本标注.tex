@@ -1,0 +1,103 @@
+\setchapterpreamble[u]{\margintoc}
+\chapter{文本标注}
+\labch{文本标注}
+
+边注是 1.5 栏宽边排版书籍的显著特性。确实，宽边距意味着更多的信息可以被显示出来，常用于放置带编号的边注、不带编号的边注、较小的章节目录、参考文献以及一些特别的块。
+
+\section{带编号边注}
+
+边注与脚注的区别就是其位置在页边距内，这样可读性会更高。插入一个边注可以使用命令 \Command{sidenote\{说明文本\}}。你可以使用命令 \Command{sidenote[记号]\{文本\}} 指定一个记号，\sidenote[O]{这条边注有一个 O ！}也可以设置一个偏置距离，使文本向上或向下移动，完整语法如下：
+
+\begin{lstlisting}[style=kaolstplain]
+\sidenote[记号][偏置距离]{文本}
+\end{lstlisting}
+
+如果设置偏置距离，则记号的括号必须保留，内容可以为空。\sidenote{了解更多关于命令 \Command{sidenote} 的用法，请阅读 \Package{sidenotes} 包的文档。}
+
+在 \Class{kaobookCJKsc} 模板中，我们从 \Package{snotez} 包中拷贝了一个特性：利用 \Command{baselineskip} 命令实现以行为单位的偏移。比如下面这样的语法会向上移动一行：
+
+\begin{lstlisting}[style=kaolstplain]
+\sidenote[][*-1]{边注文本}
+\end{lstlisting}
+
+刚才说过，边注由 \Package{sidenotes} 包提供，但此包又依赖 \Package{marginnote} 包。
+
+\section{无编号边注}
+
+这个命令，与前一节介绍的命令非常相似。可以用 \Command{marginnote[偏置]\{文本\}} 命令创建无编号的边注，同样包含偏置距离参数，以及基于 \Command{baselineskip} 命令实现的偏置行数参数，等等。\marginnote[-3cm]{虽然无编号边注命令来自 \Package{marginnote} 包，但是已经重新定义以便调整设置偏置参数的位置，目前该参数在边注文本之前设定，而原版命令在文本之后。同样，也基于 \Command{baselineskip} 增加了按行偏置的功能。这些设计目的是让所有命令有个统一的形式，防止太多命令需要记忆！}
+
+\begin{lstlisting}[style=kaolstplain]
+\marginnote[-12pt]{文本} or \marginnote[*-3]{文本}
+\end{lstlisting}
+
+\begin{kaobox}[frametitle=To Do]
+A small thing that needs to be done is to renew the \Command{sidenote}
+command so that it takes only one optional argument, the offset. The
+special mark argument can go somewhere else. In other words, we want the
+syntax of \Command{sidenote} to resemble that of \Command{marginnote}.
+\end{kaobox}
+
+我们加载了 \Package{marginnote}、\Package{marginfix} 和 \Package{placeins} 三个包。既然 \Package{sidenotes} 继承了 \Package{marginnote}，我们之前讲的关于有编号边注同样适用于此。两种边注都做了轻微的调整（\texttt{\textbackslash renewcommand\{\textbackslash marginnote\linebreak vadjust\}\{3pt\}}），以对齐底部。重要的一点是，两种边注不指定偏置距离时，都采用垂直浮动布局。但是，一旦指定了偏置距离，浮动会禁用。少数情况下会出现一些问题，有时可以设置偏置距离为 0pt 以便消除浮动。
+
+\section{脚注}
+
+我们在这里讨论脚注，虽然它不显示在边注中，而且其作用也被边注替代。脚注强迫读者转移到页面的另一个区域。有证据表面，边注解决了这个问题。但无论如何，作为竞争者，我们保留了这个命令 \Command{footnote}，以便你可以使用。\footnote{脚注以这样的形式存在，PDF 文件也会生成一个引用。}
+
+\section{章节边注目录}
+\labsec{martoc}
+
+既然我们谈到了边注，这里再引入一个命令 \Command{margintoc} 用于在边注内生成一个小目录。和我们讨论过的其他命令一样，\Command{margintoc} 接受一个偏置距离参数，像这样：\Command{margintoc[offset]}。
+
+命令可以用于文档任何位置，但我们认为在章节开头比较有意义。在这份文档里，我使用了 \KOMAScript 中的一个特性，并在导言区加入了这样的配置：
+
+\marginnote{边注目录的字体和文档目录字体相同。}
+
+\begin{lstlisting}[style=kaolstplain]
+\setchapterpreamble[u]{\margintoc}
+\chapter{Chapter title}
+\end{lstlisting}
+
+边注的空间是一个重要的资源，所以有可能需要在边注打印简短版的章节目录。于是节（小节）标题可能有三种：正文标题、文档目录标题、边注目录标题。这些不同版本可以使用如下命令同时设定：
+
+\begin{lstlisting}[style=kaolstplain]
+\section[alternative-title-for-toc]{title-as-written-in-text}[alternative-title-for-margintoc]
+\end{lstlisting}
+
+默认情况下，边注目录只包含节标题和小节标题，如果你只想展示节标题，添加如下命令到导言区：
+
+\begin{lstlisting}[style=kaolstplain]
+\setcounter{margintocdepth}{\sectiontocdepth}
+\end{lstlisting}
+
+\section{旁白列表}
+
+On some occasions it may happen that you have a very short piece of code
+that doesn't look good in the body of the text because it breaks the
+flow of narration: for that occasions, you can use a
+\Environment{marginlisting}. The support for this feature is still
+limited, especially for the captions, but you can try the following
+code:
+
+\begin{marginlisting}[-1.35cm]
+	\caption{An example of a margin listing.}
+	\vspace{0.6cm}
+	\begin{lstlisting}[language=Python,style=kaolstplain]
+print("Hello World!")
+	\end{lstlisting}
+\end{marginlisting}
+
+\begin{verbatim}
+\begin{marginlisting}[-0.5cm]
+	\caption{My caption}
+	\vspace{0.2cm}
+	\begin{lstlisting}[language=Python,style=kaolstplain]
+	... code ...
+	\end{lstlisting}
+\end{marginlisting}
+\end{verbatim}
+
+Unfortunately, the space between the caption and the listing must be
+adjusted manually; if you find a better way, please let me know.
+
+Not only textual stuff can be displayed in the margin, but also figures.
+Those will be the focus of the next chapter.

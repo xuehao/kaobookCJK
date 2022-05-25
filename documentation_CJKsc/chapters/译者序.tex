@@ -1,0 +1,23 @@
+\setchapterimage{seaside}
+\chapter*{译者序} % 加星号防止多余书签
+\addcontentsline{toc}{chapter}{译者序} % 添加到目录
+
+无意间发现这份模板，感觉非常简约大方，所以就想尝试一下。不巧的是，作者没有考虑多语言问题，简体中文并没有默认支持。浅研究一下，就有了这个版本。目前基本满足日常所需，折服于 \LaTeX 的强大，是时候替换 Markdown 了。
+
+下面简单说明一下 kaobookCJKsc 模板。首先，原则上\textbf{尽量减少对原模板的修改，以便于未来更新。}但是有些设置，一方面由于作者硬编码在样式文件中，另一方面由于很多包不支持中文，所以并不会自动翻译。为了处理这样的冲突，不得不拷贝一份，重新移植。主要工作有以下几个方面：
+
+\begin{itemize}
+    \item 为了区分原模板，所有文件增加了 CJKsc 后缀。
+    \item 增加了类似 \texttt{kaoWinCJKsc.sty} 这样的配置包，尽可能将中文相关的配置以及平台依赖集中到这里。一来为跨平台提供便利，二来也能避免配置的杂乱无章。
+    \item 为了项目结构的整洁，加入了 styles 子文件夹。
+    \item 为了支持多平台，默认依赖 Google Noto 和 liberation 系列字体。
+    \item 一些中文语序和英文相反，由于配置无法放在导言区或包内，单独增加一个 \texttt{config.tex} 文件保存，在正文中导入即可。
+\end{itemize}
+
+至此，一份漂亮的图书模板就做好了。本着够用就好的原则，没必要浪费太多时间在工具配置上。那么，万事具备，只欠东风，剩下的事情就交给你了。用好这份模板，多多创作吧！
+
+\begin{flushright}
+	\textit{薛浩}\hspace*{2.5em}
+
+    \textit{\zhtoday}
+\end{flushright}

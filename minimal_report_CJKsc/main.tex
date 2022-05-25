@@ -1,0 +1,102 @@
+% Load the kaohandt class (with the default options)
+\documentclass[
+	%fontsize=10pt, % Base font size
+	%twoside=false, % If true, use different layouts for even and odd pages (in particular, if twoside=true, the margin column will be always on the outside)
+	%secnumdepth=2, % How deep to number headings. Defaults to 2 (subsections)
+	%abstract=true, % Uncomment to print the title of the abstract
+]{styles/kaohandtCJKsc}
+
+
+%----------------------------------------------------------------------------------------
+%	包以及文档配置，新项目可以直接复制粘贴
+%----------------------------------------------------------------------------------------
+
+% 加载排版包（不支持 chinese）
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\SetLanguageKeys{english}{indentfirst=true}
+% 加载引号风格包（不支持 chinese）
+\usepackage[style=english]{csquotes}
+% 加载参考文献相关设置
+\usepackage[style=gb7714-2015ms,backref=false]{styles/kaobiblioCJKsc} % 默认使用 GB 标准
+\addbibresource{main.bib} % 参考文献文本
+% 加载数学相关设置
+\usepackage[framed]{styles/kaotheoremsCJKsc}
+% 加载超链接相关设置
+\usepackage{styles/kaorefsCJKsc}
+% 加载平台中文字体及相关设置
+\usepackage[testMathBox]{styles/kaoWinCJKsc}
+% 加载测试包
+\usepackage{blindtext}
+
+% 图片路径
+\graphicspath{{examples/documentation/images/}{images/}}
+% 生成用于编译 索引 的文件
+\makeindex[columns=3, title=索引, intoc]
+% 生成用于编译 术语 的文件
+\makenomenclature
+% 允许标题中出现 \\ 而不发出警告
+\pdfstringdefDisableCommands{\let\\\empty}
+
+%----------------------------------------------------------------------------------------
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	加载其他无法放在导言区的配置
+%----------------------------------------------------------------------------------------
+\input{styles/config.tex}
+
+%----------------------------------------------------------------------------------------
+%	REPORT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title[用于报告（或手册）的 KaoCJK 模板]{用于报告（或手册）的 KaoCJK 模板}
+
+\author[MX, MF, JMC]{薛浩\thanks{Michael Faraday who created Kao} \and Michael Faraday\thanks{Royal Society of London} \and John McClane \thanks{New York City Police Department}}
+
+\date{\zhtoday}
+
+%----------------------------------------------------------------------------------------
+%	TITLE AND ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\maketitle
+
+\margintoc
+
+\begin{abstract}
+\noindent
+摘要部分，以下是测试文字。\blindtext
+\end{abstract}
+
+{\noindent\textbf{关键字:} \LaTeX，KaoCJKsc，手册，文章，报告}
+
+\medskip
+
+%----------------------------------------------------------------------------------------
+%	MAIN BODY
+%----------------------------------------------------------------------------------------
+
+\section{介绍}
+
+此处写下你的介绍性文字，\sidecite{James2013} 并确保引用你的源文件。
+
+\blindtext\sidenote{这里是带编号边注}
+
+\section{方法}
+
+\appendix % From here onwards, chapters are numbered with letters, as is the appendix convention
+
+\section{附录}
+
+\blindtext
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+% The bibliography needs to be compiled with biber using your LaTeX editor, or on the command line with 'biber main' from the template directory
+
+\printbibliography[title=参考文献] % Set the title of the bibliography and print the references
+
+\end{document}

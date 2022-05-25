@@ -1,0 +1,263 @@
+\setchapterpreamble[u]{\margintoc}
+\chapter{数学}
+\labch{数学}
+
+\section{定理}
+
+Despite most people complain at the sight of a book full of equations,
+mathematics is an important part of many books. Here, we shall
+illustrate some of the possibilities. We believe that theorems,
+definitions, remarks and examples should be emphasised with a shaded
+background; however, the colour should not be to heavy on the eyes, so
+we have chosen a sort of light yellow.\sidenote{The boxes are all of the
+	same colour here, because we did not want our document to look like
+	\href{https://en.wikipedia.org/wiki/Harlequin}{Harlequin}.}
+
+\begin{Definition}
+	\labdef{openset}
+	Let $(X, d)$ be a metric space. A subset $U \subset X$ is an open set
+	if, for any $x \in U$ there exists $r > 0$ such that $B(x, r) \subset
+		U$. We call the topology associated to d the set $\tau\textsubscript{d}$
+	of all the open subsets of $(X, d).$
+\end{Definition}
+
+\refdef{openset} is very important. I am not joking, but I have inserted
+this phrase only to show how to reference definitions. The following
+statement is repeated over and over in different environments.
+
+\begin{Theorem}
+	A finite intersection of open sets of (X, d) is an open set of (X, d),
+	i.e $\tau\textsubscript{d}$ is closed under finite intersections. Any
+	union of open sets of (X, d) is an open set of (X, d).
+\end{Theorem}
+
+\begin{Proposition}
+	A finite intersection of open sets of (X, d) is an open set of (X, d),
+	i.e $\tau\textsubscript{d}$ is closed under finite intersections. Any
+	union of open sets of (X, d) is an open set of (X, d).
+\end{Proposition}
+
+\marginnote{You can even insert footnotes inside the theorem
+	environments; they will be displayed at the bottom of the box.}
+
+\begin{Lemma}
+	A finite intersection\footnote{I'm a footnote} of open sets of (X, d) is
+	an open set of (X, d), i.e $\tau\textsubscript{d}$ is closed under
+	finite intersections. Any union of open sets of (X, d) is an open set of
+	(X, d).
+\end{Lemma}
+
+You can safely ignore the content of the theorems\ldots I assume that if
+you are interested in having theorems in your book, you already know
+something about the classical way to add them. These example should just
+showcase all the things you can do within this class.
+
+\begin{Corollary}[Finite Intersection, Countable Union]
+	A finite intersection of open sets of (X, d) is an open set of (X, d),
+	i.e $\tau\textsubscript{d}$ is closed under finite intersections. Any
+	union of open sets of (X, d) is an open set of (X, d).
+\end{Corollary}
+
+\begin{Proof*}
+	The proof is left to the reader as a trivial exercise.
+\end{Proof*}
+
+\begin{Definition}
+	Let $(X, d)$ be a metric space. A subset $U \subset X$ is an open set
+	if, for any $x \in U$ there exists $r > 0$ such that $B(x, r) \subset
+		U$. We call the topology associated to d the set $\tau\textsubscript{d}$
+	of all the open subsets of $(X, d).$
+\end{Definition}
+
+\marginnote{
+	Here is a random equation, just because we can:
+	\begin{equation*}
+		x = a_0 + \cfrac{1}{a_1
+			+ \cfrac{1}{a_2
+				+ \cfrac{1}{a_3 + \cfrac{1}{a_4} } } }
+	\end{equation*}
+}
+
+\begin{Example}
+	Let $(X, d)$ be a metric space. A subset $U \subset X$ is an open set
+	if, for any $x \in U$ there exists $r > 0$ such that $B(x, r) \subset
+		U$. We call the topology associated to d the set $\tau\textsubscript{d}$
+	of all the open subsets of $(X, d).$
+\end{Example}
+
+\begin{remark}
+	Let $(X, d)$ be a metric space. A subset $U \subset X$ is an open set
+	if, for any $x \in U$ there exists $r > 0$ such that $B(x, r) \subset
+		U$. We call the topology associated to d the set $\tau\textsubscript{d}$
+	of all the open subsets of $(X, d).$
+\end{remark}
+
+As you may have noticed, definitions, example and remarks have
+independent counters; theorems, propositions, lemmas and corollaries
+share the same counter.
+
+\begin{remark}
+	Here is how an integral looks like inline: $\int_{a}^{b} x^2 dx$, and
+	here is the same integral displayed in its own paragraph:
+	\[\int_{a}^{b} x^2 dx\]
+\end{remark}
+
+There is also an environment for exercises.
+
+\begin{exercise}
+	Prove (or disprove) the Riemann hypothesis.
+\end{exercise}
+
+We provide one package for the theorem styles:
+\href{kaotheoremsCJK.sty}{kaotheoremsCJK.sty}, to which you can pass the
+\Option{framed} option you do want coloured boxes around theorems, like
+in this document.\sidenote{The styles without \Option{framed} are not
+	showed, but actually the only difference is that they don't have the
+	yellow boxes.} You may want to edit this files according to your taste
+and the general style of the book. However, there is an option to
+customise the background colour of the boxes if you use the
+\Option{framed} option: when you load this package, you can pass it the
+\Option{background=mycolour} option (replace \enquote{mycolour} with the
+actual colour, for instance, \enquote{red!35!white}). This will change
+the colour of all the boxes, but it is also possible to override the
+default colour only for some elements. For instance, the
+\Option{propositionbackground=mycolour} option will change the colour
+for propositions only. There are similar options for theorem,
+definition, lemma, corollary, remark, and example.
+
+\section[块]{块
+  \sidenote[][*1.8]{Notice that in the table of contents and in the
+	  header, the name of this section is \enquote{Boxes \& Environments};
+	  we achieved this with the optional argument of the \texttt{section}
+	  command.}}
+
+Say you want to insert a special section, an optional content or just
+something you want to emphasise. We think that nothing works better than
+a box in these cases. We used \Package{mdframed} to construct the ones
+shown below. You can create and modify such environments by editing the
+provided file \href{kaoCJK.sty}{kaoCJK.sty}.
+
+\begin{kaobox}[frametitle=Title of the box]
+	\blindtext
+\end{kaobox}
+
+If you set up a counter, you can even create your own numbered
+environment.
+
+\begin{kaocounter}
+	\blindtext
+\end{kaocounter}
+
+\section{实验特性}
+
+It is possible to wrap marginnotes inside boxes, too. Audacious readers
+are encouraged to try their own experiments and let me know the
+outcomes.
+
+\marginnote[-2.2cm]{
+	\begin{kaobox}[frametitle=title of margin note]
+		Margin note inside a kaobox.\\
+		(Actually, kaobox inside a marginnote!)
+	\end{kaobox}
+}
+
+I believe that many other special things are possible with the
+\Class{kaobook} class. During its development, I struggled to keep it as
+flexible as possible, so that new features could be added without too
+great an effort. Therefore, I hope that you can find the optimal way to
+express yourselves in writing a book, report or thesis with this class,
+and I am eager to see the outcomes of any experiment that you may try.
+
+下面尝试一些彩色的边框：
+
+\begin{theo}[Pythagoras' theorem]{thm:pythagoras}
+	In a right triangle, the square of the hypotenuse is equal to the sum of the squares of the catheti.
+	\[a^2+b^2=c^2\]
+\end{theo}
+In mathematics, the Pythagorean theorem, also known as Pythagoras' theorem (see theorem \ref{thm:pythagoras}), is a relation in Euclidean geometry among the three sides of a right triangle.
+
+\begin{lem}[B\'ezout's identity]{lem:bezout}
+	Let $a$ and $b$ be nonzero integers and let $d$ be their greatest common divisor. Then there exist integers $x$ and $y$ such that:
+	\[ax+by=d\]
+\end{lem}
+This is a reference to Bezout's lemma \ref{lem:bezout}
+
+\begin{theo}{thm:theorem1}
+	There exist two irrational numbers $x$, $y$ such that $x^y$ is rational.
+\end{theo}
+
+\begin{prf}{prf:proof1}
+	If $x=y=\sqrt{2}$ is an example, then we are done; otherwise $\sqrt{2}^{\sqrt{2}}$ is irrational, in which case taking $x=\sqrt{2}^{\sqrt{2}}$ and $y=\sqrt{2}$ gives us:
+	\[\bigg(\sqrt{2}^{\sqrt{2}}\bigg)^{\sqrt{2}}=\sqrt{2}^{\sqrt{2}\sqrt{2}}=\sqrt{2}^{2}=2.\]
+\end{prf}
+
+\begin{soln}{soln:soln1}
+	If $x=y=\sqrt{2}$ is an example, then we are done; otherwise $\sqrt{2}^{\sqrt{2}}$ is irrational, in which case taking $x=\sqrt{2}^{\sqrt{2}}$ and $y=\sqrt{2}$ gives us:
+	\[\bigg(\sqrt{2}^{\sqrt{2}}\bigg)^{\sqrt{2}}=\sqrt{2}^{\sqrt{2}\sqrt{2}}=\sqrt{2}^{2}=2.\]
+\end{soln}
+
+\section{高等数学风格}
+
+模仿同济版高等数学经典风格。
+
+\begin{Definition}
+	Let $(X, d)$ be a metric space. A subset $U \subset X$ is an open set
+	if, for any $x \in U$ there exists $r > 0$ such that $B(x, r) \subset
+		U$. We call the topology associated to d the set $\tau\textsubscript{d}$
+	of all the open subsets of $(X, d).$
+\end{Definition}
+
+\begin{Theorem}[Some theorem]\label{thm:some-theorem}
+	This is an important theorem.
+\end{Theorem}
+
+\begin{Corollary}[Some theorem]
+	This is an important theorem.
+\end{Corollary}
+
+\begin{Definition}
+	Let $(X, d)$ be a metric space. A subset $U \subset X$ is an open set
+	if, for any $x \in U$ there exists $r > 0$ such that $B(x, r) \subset
+		U$. We call the topology associated to d the set $\tau\textsubscript{d}$
+	of all the open subsets of $(X, d).$
+\end{Definition}
+
+\begin{Theorem}[Some theorem]
+	This is an important theorem.
+\end{Theorem}
+
+\setcounter{Corollary}{0} % 重新编号
+\begin{Corollary}[Some theorem]
+	This is an important theorem.
+\end{Corollary}
+
+\begin{Proof*}
+	If $x=y=\sqrt{2}$ is an example, then we are done; otherwise $\sqrt{2}^{\sqrt{2}}$ is irrational, in which case taking $x=\sqrt{2}^{\sqrt{2}}$ and $y=\sqrt{2}$ gives us:
+	\[\bigg(\sqrt{2}^{\sqrt{2}}\bigg)^{\sqrt{2}}=\sqrt{2}^{\sqrt{2}\sqrt{2}}=\sqrt{2}^{2}=2.\qedhere\]
+\end{Proof*}
+
+\begin{Solution}
+	If $x=y=\sqrt{2}$ is an example, then we are done; otherwise $\sqrt{2}^{\sqrt{2}}$ is irrational, in which case taking $x=\sqrt{2}^{\sqrt{2}}$ and $y=\sqrt{2}$ gives us:
+	\[\bigg(\sqrt{2}^{\sqrt{2}}\bigg)^{\sqrt{2}}=\sqrt{2}^{\sqrt{2}\sqrt{2}}=\sqrt{2}^{2}=2.\qedhere\]
+\end{Solution}
+
+\begin{Proof}
+	If $x=y=\sqrt{2}$ is an example, then we are done; otherwise $\sqrt{2}^{\sqrt{2}}$ is irrational, in which case taking $x=\sqrt{2}^{\sqrt{2}}$ and $y=\sqrt{2}$ gives us:
+	\[\bigg(\sqrt{2}^{\sqrt{2}}\bigg)^{\sqrt{2}}=\sqrt{2}^{\sqrt{2}\sqrt{2}}=\sqrt{2}^{2}=2.\qedhere\]
+\end{Proof}
+
+% \begin{margintable}
+% 	\captionsetup{type=table,position=above}
+% 	\begin{kaobox}
+% 		\caption{caption}
+% 		\begin{tabular}{ |c|c|c|c| }
+% 			\hline
+% 			col1 & col2 & col3 \\
+% 			\hline
+% 			\multirow{3}{4em}{Multiple row} & cell2 & cell3 \\ & cell5
+% 			%& cell6 \\
+% 			& cell8 & cell9 \\
+% 			\hline
+% 		\end{tabular}
+% 	\end{kaobox}
+% \end{margintable}

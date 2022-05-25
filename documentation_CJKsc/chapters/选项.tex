@@ -1,0 +1,58 @@
+\setchapterpreamble[u]{\margintoc}
+\chapter{文档类型选项}
+\labch{文档类型选项}
+
+本章将介绍最常用的选项，这些选项来自 \Class{scrbook} 以及 \Class{kaoCJKsc} 特有的部分。给模板设置选项将会改变其默认的行为，但要小心，有些选项会造成意想不到的结果……
+
+\section{\Class{KOMA} 选项}
+
+\Class{kaobookCJKsc} 模板基于 \Class{scrbook}，因此，继承而来的设置选项同样可以生效。如果你有耐心，可以读一读 \KOMAScript 的使用手册。\sidenote{手册可以从这里下载 \url{https://ctan.org/pkg/koma-script?lang=en}。}实际上，建议读一下类似的使用手册，因为这些包含很多指导性的内容。
+
+设置给模板的每一个 \KOMAScript 选项，会被自动加载。另外，在 \Class{kaobookCJKsc} 模板中，已经修改了部分默认的设置。比如，字体大小默认设置为 9.5pt，段落之间会使用空格分割\sidenote[][-7mm]{强调一下，段落间距默认设置为一半的行距：\Option{parskip} 值为 \enquote{half}。} ，并且会缩进 2 个汉字。
+
+\section{\Class{kaoCJKsc} 选项}
+
+未来计划加入一些设置段落格式的选项，以及边注位置的选项。\marginnote{译者注：原模板的段落是每行对齐的，\Class{kaobookCJKsc} 模板已经按中文习惯设置首行缩进。}借此机会，呼吁大家踊跃添加特性，重新设计现有特性，并能将结果发给我。可以在这里查看原版仓库 \url{https://github.com/fmarotta/kaobook}。
+
+\begin{kaobox}[frametitle=\noindent 待办]
+Implement the \Option{justified} and \Option{margin} options. To be consistent with the \KOMAScript style, they should accept a simple switch as a parameter, where the simple switch should be \Option{true} or \Option{false}, or one of the other standard values for simple switches supported by \KOMAScript. See the \KOMAScript documentation for further information.
+\end{kaobox}
+
+以上是使用 \Environment{kaobox} 的示例，将会在\nrefch{数学}详细介绍。本书会使用这样的块，标记将要实现的一些特性。
+
+\section{其他值得关注的东西}
+
+因实现的需要，一大堆包已经加载在该模板里了：
+
+\begin{itemize}
+	\item etoolbox
+	\item calc
+	\item xifthen
+	\item xkeyval
+	\item xparse
+	\item xstring
+\end{itemize}
+
+对于大多数包，会在合适的时间去讨论。此刻，只提及一些用于段落格式调整的包（别忘了，未来这些可能被调整），主要包括以下这些：
+
+\begin{itemize}
+	\item ragged2e
+	\item setspace
+	\item hyphenat
+	\item microtype
+	\item needspace
+	\item xspace
+	\item xcolor (with options \Option{usenames,dvipsnames})
+\end{itemize}
+
+以上这些，有的不是针对段落格式的，但我们还是归到一起了。默认情况下，原模板主体文本和边注都是每行对齐的，而中文版主体文本调整为首行缩进，边注保持原样。
+
+最后提醒一下，\Package{cleveref} 包与 \Class{kaobookCJKsc} 模板不兼容，请使用\nrefsec{hyprefs}讨论的命令替代。
+
+\section{文档结构}
+
+我们给 \Command{title} 和 \Command{author} 命令提供了可选参数，可以在前置文档中插入简短的文字。相应的，也提供了 \Command{@plaintitle} 和 \Command{@plainauthor} 命令，用于插入无样式的文字。pdf 属性由 \Option{pdftitle} 和 \Option{pdfauthor} 两个选项自动设置，也可以通过 hyperref 超链接设置具体值。\sidenote[][*-1]{由于这很重要，在此强调一下。如果 pdf 元数据被修改，编译时会设置为相应值；否则，元数据默认为文档的标题和作者。}
+
+定义了两种页面排版 \Option{margin} 和 \Option{wide}，以及两个页面样式 \Option{plain} 和 \Option{fancy}。排版只关注页边距，而样式指的是页眉和页脚。这些会在\nrefch{排版}讨论。\sidenote{目前只需要了解，\Option{margin} 排版有较宽的页边距，而 \Option{wide} 排版没有页边距。\Option{plain} 样式没有页眉页脚，而 \Option{fancy} 样式有页眉但是没有页脚。}
+
+\Command{frontmatter}，\Command{mainmatter} 和 \Command{backmatter} 三个命令重新定义以便自动切换页面的排版和样式。前置文档使用 \Option{wide} 排版和 \Option{plain} 样式。正文部分采用 \Option{margin} 排版和 \Option{fancy} 样式。附录部分保持不变；不过，我们可以使用 \Command{bookmarksetup\{startatroot\}} 命令，把章节书签等级设置为 root 级别，否则将会追加在前面的章节里。后置文档重新使用 \Option{wide} 排版，并重设了书签等级。

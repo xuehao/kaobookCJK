@@ -1,0 +1,38 @@
+%%%%%%%%%%%%%%%无法放在导言区的设置%%%%%%%%%%%%%%%%%%%%
+%目录中文名
+\renewcommand{\contentsname}{目录}
+\renewcommand{\listfigurename}{插图}
+\renewcommand{\listtablename}{表格}
+\renewcommand{\lstlistlistingname}{清单}
+\renewcommand{\lstlistingname}{清单}
+\renewcommand{\indexname}{索引}
+\renewcommand{\bibname}{参考文献}
+%其他中文名
+\renewcommand{\pagename}{页}
+\renewcommand{\chaptername}{章}
+\renewcommand{\sectionname}{节}
+\renewcommand{\subsectionname}{小节}
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\renewcommand{\eqname}{公式}
+\renewcommand{\defname}{定义}
+\renewcommand{\assumname}{假设}
+\renewcommand{\thmname}{定理}
+\renewcommand{\propname}{命题}
+\renewcommand{\lemmaname}{引理}
+\renewcommand{\remarkname}{备注}
+\renewcommand{\examplename}{例}
+\renewcommand{\exercisename}{练习}
+%引用语序
+\renewcommand{\refpage}[1]{\hyperref[#1]{\textcolor{Blue}{第\xspace\pageref{page:#1}\xspace\pagename}}} % 第 84 页
+\renewcommand{\refch}[1]{\hyperref[ch:#1]{\textcolor{Blue}{第\xspace\ref{ch:#1}\xspace\chaptername}}} % 第 7 章
+\renewcommand{\nrefch}[1]{\hyperref[ch:#1]{\textcolor{Blue}{第\xspace\ref{ch:#1}\xspace\chaptername（\nameref{ch:#1}）}}} % 第 7 章（数学）
+\renewcommand{\refsec}[1]{\hyperref[sec:#1]{\textcolor{Blue}{第\xspace\ref{sec:#1}\xspace\sectionname}}}
+\renewcommand{\nrefsec}[1]{\hyperref[sec:#1]{\textcolor{Blue}{第\xspace\ref{sec:#1}\xspace\sectionname（\nameref{sec:#1}）}}}
+\renewcommand{\refsubsec}[1]{\hyperref[subsec:#1]{\textcolor{Blue}{第\xspace\ref{subsec:#1}\xspace\subsectionname}}}
+\renewcommand{\nrefsubsec}[1]{\hyperref[subsec:#1]{\textcolor{Blue}{第\xspace\ref{subsec:#1}\xspace\subsectionname（\nameref{subsec:#1}）}}}
+%脚注编号
+% \renewcommand{\thefootnote}{\arabic{footnote}} % 1, 2, 3
+% \renewcommand{\thefootnote}{\alph{footnote}} % a, b, c
+% \renewcommand{\thefootnote}{\roman{footnote}} % i, ii, iii
+
